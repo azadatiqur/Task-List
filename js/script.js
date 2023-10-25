@@ -10,7 +10,7 @@ let taskInput = document.querySelector('#new_task');
 //Define event listeners
 form.addEventListener('submit', addTask);
 taskList.addEventListener('click', removeTask);
-
+clearBtn.addEventListener('click', clearTasks);
 
 //Define functions
 //Add Task
@@ -40,5 +40,12 @@ function removeTask(e) {
             let ele = e.target.parentElement;
             ele.remove();
         }
+    }
+}
+
+//Clear Task
+function clearTasks() {
+    while(taskList.firstChild) {
+        taskList.removeChild(taskList.firstChild);
     }
 }
