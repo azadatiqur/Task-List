@@ -8,7 +8,7 @@ let taskInput = document.querySelector('#new_task');
 
 //Define event listeners
 form.addEventListener('submit', addTask);
-
+taskList.addEventListener('click', removeTask);
 
 
 //Define functions
@@ -30,4 +30,14 @@ function addTask() {
         taskInput.value = "";//emptying the taskInput value
     }
     //e.preventDefault();//prevents the reload after form submit
+}
+
+//Remove Task
+function removeTask(e) {
+    if(e.target.hasAttribute("href")) {
+        if(confirm("Are you sure?")) {
+            let ele = e.target.parentElement;
+            ele.remove();
+        }
+    }
 }
