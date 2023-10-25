@@ -29,6 +29,7 @@ function addTask() {
         link.innerHTML = 'x';
         li.appendChild(link);
         taskList.appendChild(li);
+        storeTaskInLocalStorage(taskInput.value);
         taskInput.value = "";//emptying the taskInput value
     }
     //e.preventDefault();//prevents the reload after form submit
@@ -65,4 +66,18 @@ function filterTask(e) {
             task.style.display = "none";
         }
     })
+}
+
+//Store in Local Storage
+function storeTaskInLocalStorage(task) {
+    let tasks;
+    if(localStorage.getItem('tasks')===null) {
+        tasks = [];
+    }
+    else{
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+    tasks.push(task);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
