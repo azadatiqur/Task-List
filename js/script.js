@@ -1,3 +1,4 @@
+//Start of a journey
 //Define UI element
 let form = document.querySelector('#task_form');
 let taskList = document.querySelector('ul');
