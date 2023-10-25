@@ -12,6 +12,7 @@ form.addEventListener('submit', addTask);
 taskList.addEventListener('click', removeTask);
 clearBtn.addEventListener('click', clearTasks);
 filter.addEventListener('keyup', filterTask);
+document.addEventListener('DOMContentLoaded', getTasks);
 
 //Define functions
 //Add Task
@@ -80,4 +81,27 @@ function storeTaskInLocalStorage(task) {
     tasks.push(task);
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+//Get Tasks from local storage
+function getTasks() {
+    let tasks;
+    if(localStorage.getItem('tasks') === null) {
+        tasks = [];
+    }
+    else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    tasks.forEach(task => {
+        //Create li element
+        let li = document.createElement('li');
+        li.appendChild(document.createTextNode(task +
+        " "));//space before cross sign
+        let link = document.createElement('a');
+        link.setAttribute('href', '#');//click option will appear
+        link.innerHTML = 'x';
+        li.appendChild(link);
+        taskList.appendChild(li);
+    });
 }
