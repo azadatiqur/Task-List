@@ -42,6 +42,7 @@ function removeTask(e) {
         if(confirm("Are you sure?")) {
             let ele = e.target.parentElement;
             ele.remove();
+            removeFromLocalStorage(ele);
         }
     }
 }
@@ -104,4 +105,26 @@ function getTasks() {
         li.appendChild(link);
         taskList.appendChild(li);
     });
+}
+
+//Remove task from Local Storage
+function removeFromLocalStorage(taskItem) {
+    let tasks;
+    if(localStorage.getItem('tasks') === null) {
+        tasks = [];
+    }
+    else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    let li = taskItem;
+    li.removeChild(li.lastChild);//removing <a href="#">x</a>
+    
+    tasks.forEach((task, index) => {
+        if(li.textContent.trim() === task) {
+            tasks.splice(index,1);
+        }
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
